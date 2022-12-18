@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tính điểm CTU</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	h1 {
+		text-align: center;
+		margin: 10px;
+		margin-bottom: 15px;
+		color: blue;
+	}
+	body{
+    background-color: rgb(226, 241, 243);
+	}	
+	#table, #buttons, #tbhk, #tbtl{
+    min-height: 15vh;
+    display: flex;
+    justify-content: center;
+	flex-direction: column;
+    align-items: center;
+	}
+	#tbhk, #tbtl{
+    min-height: 3vh;
+	color: blue;
+	}
+	
+	#table>div {
+		display: flex;
+	}
+	#table>div>li {
+		padding: 7px;
+		text-align: center;
+		border: 1px solid rgb(19, 123, 129);
+		list-style: none;
+		width: 60px;
+	}
+	#table>div>li>a {
+		color: blue;
+	}
+	button {
+		margin: 3px;
+		width: 303px;
+		padding: 4px;
+		background-color: rgb(143, 220, 214);
+		border-radius: 5px;
+		color: rgb(237, 6, 6);
+		font-weight: bold;
+		cursor: pointer;
+	}
+	button:hover{
+		background-color: aqua;
+	}
+	#table>div>li>input {
+		width: 50px;
+		text-align: center;
+		border: none;
+		
+	}
+	#checkbox {
+		margin: 5px;
+	}
+	#table>div:nth-child(odd){
+		background-color: rgb(182, 225, 224);
+	}
+
+
+</style>
+<body>
+	<h1>TÍNH ĐIỂM CTU</h1>
+	<div id="table">
+		<div id="title">
+			<li><a>Môn</a></li>
+			<li><a>Số chỉ</a></li>
+			<li><a>Điểm</a></li>
+			<li><a>Tích lũy</a></li>
+		</div>
+		<div id="line1">
+			<li><a>1</a></li>
+			<li><input id="nb1" type="number" min="0"></li>
+			<li><input id="pt1" type="number" max="4" min="0"></li>
+			<li><input id="checkbox1" type="checkbox"></li>
+		</div>
+		
+		
+	</div>
+	<div id="buttons">
+		<button id="add" onclick="addsuj()">Thêm môn</button>
+		<button id="add" onclick="point()">Tính điểm</button>
+	</div>
+	<div id="tbhk"></div>
+	<div id="tbtl"></div>
+
+		
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	var id = 2;
+	function addsuj(){
+		$("#table").append('<div id="line'+id+'"></div>')
+		$("#line"+id).append('<li><a>'+id+'</a></li>')
+		$("#line"+id).append('<li><input id="nb'+id+'" type="number" min="0"></li>')
+		$("#line"+id).append('<li><input id="pt'+id+'" type="number"max="4" min="0"></li>')
+		$("#line"+id).append('<li><input id="checkbox'+id+'" type="checkbox"></li>')
+		id += 1
+	}
+	function point() {
+		var pointtbhk = 0;nbtbhk = 0.00001;pointtbtl = 0;nbtbtl = 0.0001;
+		for (var i=1; i<id; i++) {
+			if (($("#checkbox"+i).is(":checked"))??true){
+				nbtbtl += $("#nb"+i).val() * 1
+				pointtbtl += $("#nb"+i).val() * $("#pt"+i).val()
+			}
+			nbtbhk += $("#nb"+i).val() * 1
+			pointtbhk += ($("#nb"+i).val()) * ($("#pt"+i).val())
+		}
+		var div1 = document.getElementById("tbhk");
+		var div2 = document.getElementById("tbtl");
+		div1.innerHTML = 'Trung bình học kì: '+(pointtbhk/nbtbhk).toFixed(2)
+		div2.innerHTML = 'Trung bình tích lũy: '+(pointtbtl/nbtbtl).toFixed(2)
+	}
+	
+</script>
+</html>
